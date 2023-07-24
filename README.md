@@ -7,7 +7,7 @@ Clone into the git repository using command:
 ```bash
 git clone https://github.com/minhquan24/Yolov8xNSFW.git
 ```
-#Explain files:
+#Explain files:<br>
 **Dockerfile**: The Dockerfile for building the backend container.<br>
 **docker-compose.yml**: The docker-compose file for running the backend.<br>
 **model.py**: The Python code for the ML backend model.<br>
