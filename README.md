@@ -19,6 +19,7 @@ git clone https://github.com/minhquan24/Yolov8xNSFW.git
 # Download the requirements dependencies:
 
 ```bash
+cd Yolov8xNSFW
 pip install -r requirments.txt
 ```
 
