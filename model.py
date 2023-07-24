@@ -22,8 +22,8 @@ class YOLOv8Model(LabelStudioMLBase):
 
         # Initialize self variables
         self.from_name, self.to_name, self.value, self.classes = get_single_tag_keys(
-            self.parsed_label_config, 'PolygonLabels', 'Image')
-        self.labels = ['capsules', 'tablets']
+            self.parsed_label_config, 'RectangleLabel', 'Image')
+        self.labels = ['anus','make_love','nipple','penis','vagina']
         # Load model
         self.model = YOLO("best.pt")
 
@@ -63,21 +63,21 @@ class YOLOv8Model(LabelStudioMLBase):
             for i, (box, segm) in enumerate(zip(result.boxes, result.masks.segments)):
                 
                 # 2D array with poligon points 
-                polygon_points = (segm * 100).tolist()
+                rectangle_points = (segm * 100).tolist()
 
                 # Adding dict to prediction
                 predictions.append({
                     "from_name" : self.from_name,
                     "to_name" : self.to_name,
                     "id": str(i),
-                    "type": "polygonlabels",
+                    "type": "rectanglelabels",
                     "score": box.conf.item(),
                     "original_width": original_width,
                     "original_height": original_height,
                     "image_rotation": 0,
                     "value": {
-                        "points": polygon_points,
-                        "polygonlabels": [self.labels[int(box.cls.item())]]
+                        "points": rectangle_points,
+                        "rectanglelabels": [self.labels[int(box.cls.item())]]
                     }})
 
                 # Calculating score
@@ -90,7 +90,7 @@ class YOLOv8Model(LabelStudioMLBase):
         final_prediction = [{
             "result": predictions,
             "score": score / (i + 1),
-            "model_version": "v8s"
+            "model_version": "v8x"
         }]
 
         return final_prediction
