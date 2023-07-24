@@ -61,9 +61,9 @@ class YOLOv8Model(LabelStudioMLBase):
         # Getting mask segments, boxes from model prediction
         for result in results:
             for i, (box, segm) in enumerate(zip(result.boxes, result.masks.segments)):
+
                 
-                # 2D array with poligon points 
-                polygon_points = (segm * 100).tolist()
+                rectangle_points = (segm * 100).tolist()
 
                 # Adding dict to prediction
                 predictions.append({
@@ -76,7 +76,7 @@ class YOLOv8Model(LabelStudioMLBase):
                     "original_height": original_height,
                     "image_rotation": 0,
                     "value": {
-                        "points": polygon_points,
+                        "points": rectangle_points,
                         "rectanglelabels": [self.labels[int(box.cls.item())]]
                     }})
 
