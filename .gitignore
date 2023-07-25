@@ -4,3 +4,4 @@ images
 __pycache__
 .ipynb_checkpoints
 *.pt
+NSFW3_model/

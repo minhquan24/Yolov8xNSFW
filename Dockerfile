@@ -14,6 +14,7 @@ RUN pip install --upgrade pip
 RUN --mount=type=cache,target=$PIP_CACHE_DIR \
     pip install -r requirements.txt
 
+RUN pip install --upgrade ultralytics
 
 COPY uwsgi.ini /etc/uwsgi/
 COPY supervisord.conf /etc/supervisor/conf.d/
