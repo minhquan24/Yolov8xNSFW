@@ -23,7 +23,6 @@ services:
       - LABEL_STUDIO_ML_BACKEND_V2=1
       - LABEL_STUDIO_HOST=
       - LABEL_STUDIO_API_KEY=
-
     ports:
       - 9090:9090
     depends_on:

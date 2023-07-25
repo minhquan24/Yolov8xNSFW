@@ -79,8 +79,8 @@ class YOLOv8Model(LabelStudioMLBase):
         # Getting mask segments, boxes from model prediction
         for result in results:
             for i, (box, segm) in enumerate(zip(result.boxes, result.masks.segments)):
-                
-                # 2D array with poligon points 
+
+
                 rectangle_points = (segm * 100).tolist()
 
                 # Adding dict to prediction
@@ -112,9 +112,3 @@ class YOLOv8Model(LabelStudioMLBase):
         }]
 
         return final_prediction
-    #
-    # def fit(self, completions, workdir=None, **kwargs):
-    #     """
-    #     Dummy function to train model
-    #     """
-    #     return {'random': random.randint(1, 10)}
