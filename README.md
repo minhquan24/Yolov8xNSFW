@@ -16,13 +16,6 @@ git clone https://github.com/minhquan24/Yolov8xNSFW.git
 **supervisord.conf**: The supervisord configuration file for running the backend processes.<br>
 **requirements.txt**: The list of Python dependencies for the backend.<br>
 
-# Download the requirements dependencies:
-
-```bash
-cd Yolov8xNSFW
-pip install -r requirments.txt
-```
-
 ## Docker:
 Please make sure that Docker-compose is downloaded and ready to use!!!
 
