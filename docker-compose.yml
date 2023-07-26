@@ -1,6 +1,17 @@
 version: "3.8"
 
 services:
+  label_studio_ui:
+    image: heartexlabs/label-studio:latest
+    container_name: label_studio_ui
+    volumes:
+      - ./mydata:/label-studio/data
+      - ./myfiles:/label-studio/files
+    ports:
+      - "8080:8080"
+    environment:
+      - LABEL_STUDIO_LOCAL_FILES_SERVING_ENABLED=true
+      - LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=/label-studio/files
   redis:
     image: redis:alpine
     container_name: redis
@@ -9,8 +20,8 @@ services:
       - "./data/redis:/data"
     expose:
       - 6379
-  server:
-    container_name: label-studio-ml
+  ml_server:
+    container_name: ml_server
     build: .
     environment:
       - USE_REDIS=0
@@ -33,73 +44,5 @@ services:
     volumes:
       - "./data/server:/data"
       - "./logs:/tmp"
-version: "3.8"
-
-services:
-  redis:
-    image: redis:alpine
-    container_name: redis
-    hostname: redis
-    volumes:
-      - "./data/redis:/data"
-    expose:
-      - 6379
-  server:
-    container_name: label-studio-ml
-    build: .
-    environment:
-      - USE_REDIS=0
-      - PYTHONUNBUFFERED=0
-      - MODEL_DIR=/data/models
-      - RQ_QUEUE_NAME=default
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - LABEL_STUDIO_USE_REDIS=true
-      - LABEL_STUDIO_ML_BACKEND_V2=1
-      - LABEL_STUDIO_HOST=
-      - LABEL_STUDIO_API_KEY=
-
-    ports:
-      - 9090:9090
-    depends_on:
-      - redis
-    links:
-      - redis
-    volumes:
-      - "./data/server:/data"
-      - "./logs:/tmp"
-version: "3.8"
-
-services:
-  redis:
-    image: redis:alpine
-    container_name: redis
-    hostname: redis
-    volumes:
-      - "./data/redis:/data"
-    expose:
-      - 6379
-  server:
-    container_name: label-studio-ml
-    build: .
-    environment:
-      - USE_REDIS=0
-      - PYTHONUNBUFFERED=0
-      - MODEL_DIR=/data/models
-      - RQ_QUEUE_NAME=default
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - LABEL_STUDIO_USE_REDIS=true
-      - LABEL_STUDIO_ML_BACKEND_V2=1
-      - LABEL_STUDIO_HOST=
-      - LABEL_STUDIO_API_KEY=
-
-    ports:
-      - 9090:9090
-    depends_on:
-      - redis
-    links:
-      - redis
-    volumes:
-      - "./data/server:/data"
-      - "./logs:/tmp"
+      - "./inferrence:/app/inferrence_model"
+      - "./myfiles:/app/files"

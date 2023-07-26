@@ -9,3 +9,6 @@ __pycache__
 docker-compose.yml
 data
 logs
+inferrence
+myfiles
+mydata

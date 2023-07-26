@@ -10,3 +10,4 @@ werkzeug==2.0.2
 pickle5==0.0.11
 tqdm==4.65.0
 ultralytics==8.0.65
+openvino==2023.0.1
